@@ -247,7 +247,7 @@ function setupScrollAnimations() {
 const loader = new GLTFLoader();
 
 loader.load(
-  "../assets/car.glb",
+  "/assets/car.glb",
   (gltf) => {
     car = gltf.scene;
     car.scale.set(1, 1, 1);
