@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HIMMAT's Car Landing</title>
+
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Three.js importmap (keep this style, clean + modern) -->
+  <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.176.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.176.0/examples/jsm/"
+        }
+      }
+    </script>
+
+  <!-- GSAP + ScrollTrigger for professional scroll-driven animation -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+</head>
+
+<body>
+  <!-- Ambient background glow -->
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <!-- Navbar -->
+  <header class="nav-wrap">
+    <nav class="nav">
+      <a class="brand" href="#home" aria-label="Go to home">
+        <span class="brand-mark">H</span>
+        <span class="brand-text">HIMMAT</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <div class="nav-links" id="navLinks">
+        <a href="#home">Home</a>
+        <a href="#services">Services</a>
+        <a href="#fleet">Cars</a>
+        <a href="#contact">Contact</a>
+
+        <a class="nav-cta" href="#fleet">
+          <i class="fa-solid fa-bolt"></i>
+          Get Started
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Three.js canvas container (fixed, behind content but above background) -->
+  <div id="three-root" aria-hidden="true"></div>
+
+  <!-- Main sections (5 sections total) -->
+  <main>
+    <!-- Section 1: Hero -->
+    <section class="section section-hero" id="home" data-section="1">
+      <div class="container grid-2">
+        <div class="hero-copy">
+          <p class="eyebrow">Premium mobility for modern explorers</p>
+          <h1 class="headline">
+            HIMMAT's <span class="accent">Professionals</span>,<br />
+            Experience &amp; Adventure
+          </h1>
+          <p class="subhead">
+            A premium car experience designed for comfort, performance, and confidence.
+            Scroll to explore services, fleet, and your next adventure.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#fleet">
+              Get Started
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+            <a class="btn btn-ghost" href="#services">
+              Learn More
+            </a>
+          </div>
+
+          <div class="hero-metrics">
+            <div class="metric">
+              <div class="metric-value">4.9</div>
+              <div class="metric-label">Avg. customer rating</div>
+            </div>
+            <div class="metric">
+              <div class="metric-value">24/7</div>
+              <div class="metric-label">Support &amp; roadside help</div>
+            </div>
+            <div class="metric">
+              <div class="metric-value">120+</div>
+              <div class="metric-label">Cars in the fleet</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <!-- This is intentionally empty: the 3D car sits here visually.
+                 We keep a subtle overlay to make it feel designed. -->
+          <div class="visual-card">
+            <div class="visual-hint">
+              <span class="dot"></span> Smooth 3D scroll experience
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="scroll-indicator" aria-hidden="true">
+        <span>Scroll</span>
+        <div class="mouse">
+          <div class="wheel"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Services -->
+    <section class="section section-services" id="services" data-section="2">
+      <div class="container">
+        <div class="section-head">
+          <h2>Company Services &amp; Facilities</h2>
+          <p>
+            Built for reliability and a premium customer experience — from booking to drop-off.
+          </p>
+        </div>
+
+        <div class="cards-grid">
+          <article class="info-card">
+            <i class="fa-solid fa-shield-halved"></i>
+            <h3>Insurance Coverage</h3>
+            <p>Flexible protection plans that fit your trip style and risk comfort.</p>
+          </article>
+
+          <article class="info-card">
+            <i class="fa-solid fa-gauge-high"></i>
+            <h3>Performance Fleet</h3>
+            <p>Well-maintained cars with consistent checks, detailing, and safety standards.</p>
+          </article>
+
+          <article class="info-card">
+            <i class="fa-solid fa-headset"></i>
+            <h3>24/7 Assistance</h3>
+            <p>Support whenever you need it — changes, issues, or roadside situations.</p>
+          </article>
+
+          <article class="info-card">
+            <i class="fa-solid fa-location-dot"></i>
+            <h3>Pickup &amp; Drop</h3>
+            <p>Convenient locations and optional delivery for a smooth start and finish.</p>
+          </article>
+
+          <article class="info-card">
+            <i class="fa-solid fa-wallet"></i>
+            <h3>Transparent Pricing</h3>
+            <p>No hidden fees. Clear plans for renting, subscribing, or owning.</p>
+          </article>
+
+          <article class="info-card">
+            <i class="fa-solid fa-leaf"></i>
+            <h3>Eco Options</h3>
+            <p>Hybrid and efficient choices to reduce fuel cost and footprint.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: “Feature story” / Brand -->
+    <section class="section section-story" data-section="3">
+      <div class="container grid-2">
+        <div class="story-copy">
+          <div class="section-head">
+            <h2>Designed for confidence on every road</h2>
+            <p>
+              Whether it’s daily commuting, weekend escapes, or long-distance comfort —
+              we focus on stability, safety, and the feeling of control.
+            </p>
+          </div>
+
+          <ul class="bullet">
+            <li><i class="fa-solid fa-circle-check"></i> Pro-grade cleaning & detailing standards</li>
+            <li><i class="fa-solid fa-circle-check"></i> Safety checks before every ride</li>
+            <li><i class="fa-solid fa-circle-check"></i> Smooth booking + fast confirmations</li>
+            <li><i class="fa-solid fa-circle-check"></i> Flexible plans: rent, own, or long-term</li>
+          </ul>
+
+          <div class="story-actions">
+            <a class="btn btn-primary" href="#fleet">Browse Cars</a>
+            <a class="btn btn-ghost" href="#contact">Contact Us</a>
+          </div>
+        </div>
+
+        <div class="story-panel">
+          <div class="panel">
+            <div class="panel-title">What you get</div>
+            <div class="panel-row">
+              <span>Delivery option</span><span>Available</span>
+            </div>
+            <div class="panel-row">
+              <span>Insurance</span><span>Flexible</span>
+            </div>
+            <div class="panel-row">
+              <span>Support</span><span>24/7</span>
+            </div>
+            <div class="panel-row">
+              <span>Fleet quality</span><span>Premium</span>
+            </div>
+            <div class="panel-divider"></div>
+            <div class="panel-note">
+              Scroll to explore the fleet selection.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Horizontal scroll list -->
+    <section class="section section-fleet" id="fleet" data-section="4">
+      <div class="container section-car-list">
+        
+        <div class="section-head">
+          <h2>Choose your next car</h2>
+          <p>Swipe horizontally or use mouse wheel/trackpad to explore the fleet cards.</p>
+        </div>
+
+        <div class="fleet-scroll" role="region" aria-label="Car list">
+          <article class="car-card">
+            <div class="car-thumb">
+              <img src="./assets/car_image_1.jpg" alt="HIMMAT Premium GT" loading="lazy" />
+            </div>
+            <div class="car-meta">
+              <h3>HIMMAT Urban X</h3>
+              <p class="price">$79 / day</p>
+            </div>
+            <div class="car-actions">
+              <button class="btn btn-primary btn-sm">Rent Car</button>
+              <button class="btn btn-ghost btn-sm">Own Car</button>
+            </div>
+          </article>
+
+          <article class="car-card">
+            <div class="car-thumb">
+              <img src="./assets/car_image_2.jpg" alt="HIMMAT Premium GT" loading="lazy" />
+            </div>
+            <div class="car-meta">
+              <h3>HIMMAT Touring S</h3>
+              <p class="price">$95 / day</p>
+            </div>
+            <div class="car-actions">
+              <button class="btn btn-primary btn-sm">Rent Car</button>
+              <button class="btn btn-ghost btn-sm">Own Car</button>
+            </div>
+          </article>
+
+          <article class="car-card">
+            <div class="car-thumb">
+              <img src="./assets/car_image_3.jpg" alt="HIMMAT Premium GT" loading="lazy" />
+            </div>
+            <div class="car-meta">
+              <h3>HIMMAT Adventure R</h3>
+              <p class="price">$110 / day</p>
+            </div>
+            <div class="car-actions">
+              <button class="btn btn-primary btn-sm">Rent Car</button>
+              <button class="btn btn-ghost btn-sm">Own Car</button>
+            </div>
+          </article>
+
+          <article class="car-card">
+            <div class="car-thumb">
+              <img src="./assets/car_image_4.jpg" alt="HIMMAT Premium GT" loading="lazy" />
+            </div>
+
+            <div class="car-meta">
+              <h3>HIMMAT Premium GT</h3>
+              <p class="price">$139 / day</p>
+            </div>
+
+            <div class="car-actions">
+              <button class="btn btn-primary btn-sm">Rent Car</button>
+              <button class="btn btn-ghost btn-sm">Own Car</button>
+            </div>
+          </article>
+
+        </div>
+
+        
+      </div>
+    </section>
+
+    <!-- Section 5: Ending / Footer -->
+    <section class="section section-end" id="contact" data-section="5">
+      <div class="container end-grid">
+        <div class="end-copy">
+          <h2>Explore more adventure</h2>
+          <p>
+            Download our app for faster booking, special offers, and curated routes.
+          </p>
+
+          <div class="store-buttons">
+            <a class="store-btn" href="#" aria-label="Explore more on Google Play Store">
+              <i class="fa-brands fa-google-play"></i>
+              <span>
+                <small>Explore more on</small>
+                <strong>Google Play</strong>
+              </span>
+            </a>
+
+            <a class="store-btn" href="#" aria-label="Explore more on Apple App Store">
+              <i class="fa-brands fa-apple"></i>
+              <span>
+                <small>Explore more on</small>
+                <strong>App Store</strong>
+              </span>
+            </a>
+          </div>
+
+          <div class="contact-links">
+            <a href="#"><i class="fa-brands fa-instagram"></i> Instagram</a>
+            <a href="#"><i class="fa-brands fa-x-twitter"></i> X</a>
+            <a href="#"><i class="fa-brands fa-facebook"></i> Facebook</a>
+            <a href="#"><i class="fa-solid fa-envelope"></i> Email</a>
+          </div>
+        </div>
+
+        <footer class="footer-card">
+          <div class="footer-brand">
+            <div class="brand-mark big">H</div>
+            <div>
+              <div class="footer-title">HIMMAT</div>
+              <div class="footer-sub">Professionals · Experience · Adventure</div>
+            </div>
+          </div>
+
+          <div class="footer-cols">
+            <div>
+              <h4>Company</h4>
+              <a href="#services">Services</a>
+              <a href="#fleet">Fleet</a>
+              <a href="#contact">Contact</a>
+            </div>
+            <div>
+              <h4>Support</h4>
+              <a href="#">Help Center</a>
+              <a href="#">Terms</a>
+              <a href="#">Privacy</a>
+            </div>
+            <div>
+              <h4>Office</h4>
+              <p class="muted">
+                Example address line<br />
+                Seoul, KR<br />
+                +82 10-0000-0000
+              </p>
+            </div>
+          </div>
+
+          <div class="footer-bottom">
+            <span class="muted">© <span id="year"></span> HIMMAT. All rights reserved.</span>
+          </div>
+        </footer>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="./src/script.js"></script>
+  <!-- <script src="/intro.js"></script> -->
+
+</body>
+
+</html>
