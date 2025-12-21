@@ -287,11 +287,11 @@ code {
 .hero-visual .visual-card {
   height: 420px;
   border-radius: 28px;
-  border: 1px solid var(--stroke);
-  background: radial-gradient(700px 300px at 20% 20%, rgba(103,232,249,0.15), transparent 60%),
+  /* border: 1px solid var(--stroke); */
+  /* background: radial-gradient(700px 300px at 20% 20%, rgba(103,232,249,0.15), transparent 60%),
               radial-gradient(600px 320px at 80% 60%, rgba(167,139,250,0.14), transparent 55%),
               rgba(255,255,255,0.03);
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow); */
   position: relative;
   overflow: hidden;
 }
